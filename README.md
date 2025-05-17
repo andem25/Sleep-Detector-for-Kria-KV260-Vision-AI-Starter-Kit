@@ -1,2 +1,5 @@
 # sleep_detector_cps
 Sleep detector using kria KV260 AI vision and Bluecoin
+
+References:
+* https://learnopencv.com/driver-drowsiness-detection-using-mediapipe-in-python/
