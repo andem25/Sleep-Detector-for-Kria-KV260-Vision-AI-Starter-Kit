@@ -1,7 +1,7 @@
-# sleep_detector_cps
+# sleep_detector_cps - NOT RELEASED WORK IN PROGRESS
 Sleep detector using kria KV260 AI vision and Bluecoin
 
-PROVA
+
 
 
 References:
