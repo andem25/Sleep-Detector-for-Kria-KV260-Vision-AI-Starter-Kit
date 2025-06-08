@@ -5,28 +5,28 @@ Sleep detector using kria KV260 AI vision and Bluecoin
 
 ## 1. Flash Ubuntu on your Kria
 
-Scarica e flasha Ubuntu 22.04 per Kria da:
+Download and flash Ubuntu 22.04 for Kria from:
 https://people.canonical.com/~platform/images/xilinx/kria-ubuntu-22.04/
 
 ## 2. Install and initialize `xlnx-config`
 
-Al primo avvio (e connesso a Internet), esegui:
+On first boot (while connected to the internet), run:
 
 ```bash
 sudo snap install xlnx-config --classic --channel=2.x
 sudo xlnx-config.sysinit
 ```
 
-Questo aggiornerà anche tutti i pacchetti di sistema.  
-Quindi, riavvia il dispositivo:
+This will also upgrade all system packages.  
+Then reboot:
 
 ```bash
 sudo reboot
 ```
 
-## 3. Rimuovi l’interfaccia grafica
+## 3. Remove the graphical interface
 
-Per risparmiare risorse:
+To save resources:
 
 ```bash
 sudo systemctl get-default
@@ -34,71 +34,72 @@ sudo systemctl set-default multi-user.target
 sudo reboot
 ```
 
-## 4. Installa PYNQ
+## 4. Install PYNQ
 
-1. Clona il repository:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/Xilinx/Kria-PYNQ.git
    ```
 
-2. Entra nella cartella:
+2. Change into the directory:
 
    ```bash
    cd Kria-PYNQ/
    ```
 
-3. Avvia lo script di installazione:
+3. Run the install script:
 
    ```bash
    sudo bash install.sh -b KV260
    ```
 
-## 5. Accedi all’interfaccia web di PYNQ
+## 5. Access the PYNQ web interface
 
-Apri nel browser:
+Open in your browser:
 
 ```
-https://<IP_della_tua_Kria>:9090/lab
+https://<your_kria_ip>:9090/lab
 ```
 
-Per trovare il tuo indirizzo IP:
+To find your IP address:
 
 ```bash
 ip a
 ```
 
-![Esempio output di `ip a`](path/to/ip_address_example.png)
+![Example output of `ip a`](path/to/ip_address_example.png)
 
-La password di default è `Xilinx`.
+The default password is `Xilinx`.
 
-## 6. Clona il progetto
+## 6. Clone your project
 
-Dal terminale (dalla web-app di PYNQ):
+In the terminal (from the PYNQ web app):
 
 ```bash
-git clone https://github.com/andem25/Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/tree/main
+git clone <your_repo_link>
 ```
 
-## 7. Configura il dongle Bluetooth
+## 7. Configure the Bluetooth dongle
 
-> **Nota:** se usi un dongle diverso da RTL8761BU, puoi saltare questo passaggio.
+> **Note:** If you are using a different dongle than RTL8761BU, skip this section.
 
-1. Crea la cartella firmware e scarica il modulo:
+1. Create the firmware directory and download the firmware:
 
    ```bash
    sudo mkdir -p /lib/firmware/rtl_bt
-   sudo wget -O /lib/firmware/rtl_bt/rtl8761bu_fw.bin      https://www.lwfinger.com/download/rtl_bt/rtl8761bu_fw.bin
+   sudo wget -O /lib/firmware/rtl_bt/rtl8761bu_fw.bin \
+     https://www.lwfinger.com/download/rtl_bt/rtl8761bu_fw.bin
    ```
 
-2. Riavvia e verifica:
+2. Reboot and verify:
 
    ```bash
    sudo reboot
    bluetoothctl
    ```
 
-3. Installa dipendenze e aggiungi `root` al gruppo bluetooth:
+3. Install dependencies and add `root` to the bluetooth group:
 
    ```bash
    sudo apt install python3-pip python3-distutils libglib2.0-dev
@@ -106,31 +107,32 @@ git clone https://github.com/andem25/Sleep-Detector-for-Kria-KV260-Vision-AI-Sta
    sudo reboot
    ```
 
-## 8. Installa le librerie Python
+## 8. Install Python libraries
 
-Dopo il riavvio, nel tuo virtualenv (es. `sleep_venv`):
+After reboot, in your virtual environment (e.g., `sleep_venv`):
 
 ```bash
 pip install blue-st-sdk bluepy opuslib
 ```
 
-## 9. Imposta i permessi su Bluepy-helper
+## 9. Set permissions for bluepy-helper
 
 ```bash
-sudo setcap "cap_net_raw+eip cap_net_admin+eip"   /home/ubuntu/sleep_venv/lib/python3.10/site-packages/bluepy/bluepy-helper
-
+sudo setcap "cap_net_raw+eip cap_net_admin+eip" \
+  /home/ubuntu/sleep_venv/lib/python3.10/site-packages/bluepy/bluepy-helper
 sudo getcap /home/ubuntu/sleep_venv/lib/python3.10/site-packages/bluepy/bluepy-helper
 ```
 
-Correggi un problema noto con `blue_st_sdk`:
+Fix a known issue with `blue_st_sdk`:
 
 ```bash
-sudo sed -i '43c class DictPutSingleElement(collections.abc.MutableMapping):'   /usr/local/share/pynq-venv/lib/python3.10/site-packages/blue_st_sdk/utils/dict_put_single_element.py
+sudo sed -i '43c class DictPutSingleElement(collections.abc.MutableMapping):' \
+  /usr/local/share/pynq-venv/lib/python3.10/site-packages/blue_st_sdk/utils/dict_put_single_element.py
 ```
 
-## 10. Avvia l’applicazione
+## 10. Run the application
 
-Entra nella cartella del progetto e lancia:
+Change into the project folder and run:
 
 ```bash
 python app.py
