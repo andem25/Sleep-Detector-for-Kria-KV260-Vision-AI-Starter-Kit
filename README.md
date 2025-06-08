@@ -1,5 +1,5 @@
-# sleep_detector_cps - NOT RELEASED WORK IN PROGRESS
-Sleep detector using kria KV260 AI vision and Bluecoin
+# sleep_detector_cps - Beta
+Sleep detector using kria KV260 AI vision, a usb camera connectd and the STMicroelectronics' Bluecoin
 
 # How to Install This Application
 
@@ -126,13 +126,13 @@ In the terminal (from the PYNQ web app):
 
 ```bash
 git clone https://github.com/andem25/Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/
-cd Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/
 ```
 
 ## 10. Run the application
-
+First check if the USB camera is connected and the bluecoin is on and reachable
 Change into the project folder and run:
 
 ```bash
+cd Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/
 python app.py
 ```
