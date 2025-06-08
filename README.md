@@ -72,15 +72,8 @@ ip a
 
 The default password is `Xilinx`.
 
-## 6. Clone your project
 
-In the terminal (from the PYNQ web app):
-
-```bash
-git clone <your_repo_link>
-```
-
-## 7. Configure the Bluetooth dongle
+## 6. Configure the Bluetooth dongle
 
 > **Note:** If you are using a different dongle than RTL8761BU, skip this section.
 
@@ -107,7 +100,7 @@ git clone <your_repo_link>
    sudo reboot
    ```
 
-## 8. Install Python libraries
+## 7. Install Python libraries
 
 After reboot, in your virtual environment (e.g., `sleep_venv`):
 
@@ -115,7 +108,7 @@ After reboot, in your virtual environment (e.g., `sleep_venv`):
 pip install blue-st-sdk bluepy opuslib
 ```
 
-## 9. Set permissions for bluepy-helper
+## 8. Set permissions for bluepy-helper
 
 ```bash
 sudo setcap "cap_net_raw+eip cap_net_admin+eip" /usr/local/share/pynq-venv/lib/python3.10/site-packages/bluepy/bluepy-helper
@@ -126,6 +119,14 @@ Fix a known issue with `blue_st_sdk`:
 
 ```bash
 sudo sed -i '43c class DictPutSingleElement(collections.abc.MutableMapping):' /usr/local/share/pynq-venv/lib/python3.10/site-packages/blue_st_sdk/utils/dict_put_single_element.py
+```
+## 9. Clone your project
+
+In the terminal (from the PYNQ web app):
+
+```bash
+git clone https://github.com/andem25/Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/
+cd Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/
 ```
 
 ## 10. Run the application
