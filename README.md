@@ -16,7 +16,7 @@ On first boot (while connected to the internet), run:
 sudo snap install xlnx-config --classic --channel=2.x
 sudo xlnx-config.sysinit
 ```
-
+Leave all the configurations as default.
 This will also upgrade all system packages.  
 Then reboot:
 
@@ -118,16 +118,14 @@ pip install blue-st-sdk bluepy opuslib
 ## 9. Set permissions for bluepy-helper
 
 ```bash
-sudo setcap "cap_net_raw+eip cap_net_admin+eip" \
-  /home/ubuntu/sleep_venv/lib/python3.10/site-packages/bluepy/bluepy-helper
-sudo getcap /home/ubuntu/sleep_venv/lib/python3.10/site-packages/bluepy/bluepy-helper
+sudo setcap "cap_net_raw+eip cap_net_admin+eip" /usr/local/share/pynq-venv/lib/python3.10/site-packages/bluepy/bluepy-helper
+sudo getcap /usr/local/share/pynq-venv/lib/python3.10/site-packages/bluepy/bluepy-helper
 ```
 
 Fix a known issue with `blue_st_sdk`:
 
 ```bash
-sudo sed -i '43c class DictPutSingleElement(collections.abc.MutableMapping):' \
-  /usr/local/share/pynq-venv/lib/python3.10/site-packages/blue_st_sdk/utils/dict_put_single_element.py
+sudo sed -i '43c class DictPutSingleElement(collections.abc.MutableMapping):' /usr/local/share/pynq-venv/lib/python3.10/site-packages/blue_st_sdk/utils/dict_put_single_element.py
 ```
 
 ## 10. Run the application
