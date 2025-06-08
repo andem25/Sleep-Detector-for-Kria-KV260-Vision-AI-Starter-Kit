@@ -77,7 +77,7 @@ La password di default è `Xilinx`.
 Dal terminale (dalla web-app di PYNQ):
 
 ```bash
-git clone <link_del_tuo_repo>
+git clone https://github.com/andem25/Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/tree/main
 ```
 
 ## 7. Configura il dongle Bluetooth
