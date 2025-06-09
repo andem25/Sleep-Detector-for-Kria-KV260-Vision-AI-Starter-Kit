@@ -30,5 +30,4 @@ BLUECOIN_TAG = os.getenv("BLUECOIN_TAG")
 BLUECOIN_IDX = int(os.getenv("BLUECOIN_INDEX", "1"))
 
 # --- Debug ---
-# DEBUG = bool(int(os.getenv("DBG", "1")))
-DEBUG = False
+DEBUG = bool(int(os.getenv("DBG", "0")))
