@@ -10,9 +10,9 @@ from blue_st_sdk.manager import Manager, ManagerListener
 from blue_st_sdk.node import NodeListener
 from blue_st_sdk.feature import FeatureListener
 from blue_st_sdk.features.feature_gyroscope import FeatureGyroscope
-from config import (SCAN_TIME_s, BLUECOIN_TAG, BLUECOIN_IDX, GYRO_THR,
+from .config import (SCAN_TIME_s, BLUECOIN_TAG, BLUECOIN_IDX, GYRO_THR,
                     BLUECOIN_SESSION_s, YAWN_THRESHOLD)
-from utils import dbg
+from .utils import dbg
 
 # --- Listeners BLE specifici per questo modulo ---
 class _MgrListener(ManagerListener):
