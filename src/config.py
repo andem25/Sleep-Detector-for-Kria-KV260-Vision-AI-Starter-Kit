@@ -7,7 +7,7 @@ import os
 
 # --- Configurazione DPU e Modello ---
 BIT_PATH = "dpu.bit"
-XMODEL_PATH = "a.xmodel"
+XMODEL_PATH = "../models/a.xmodel"
 CLASS_NAMES = ["no_yawn", "yawn"]
 
 # --- Configurazione Camera ---
