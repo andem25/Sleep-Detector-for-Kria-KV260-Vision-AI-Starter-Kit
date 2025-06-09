@@ -8,7 +8,7 @@ import numpy as np
 import sys
 from pynq_dpu import DpuOverlay
 from config import BIT_PATH, XMODEL_PATH, CLASS_NAMES
-from utils import dbg
+from sleep_detector_cps.src.utils_detector_cps.src.utils import dbg
 
 class DPUHandler:
     def __init__(self):

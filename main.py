@@ -12,13 +12,16 @@ import threading
 import collections
 import signal
 import itertools
+import signal
+import itertools
 import cv2
 
 # Importa i moduli custom e la configurazione
-import config as cfg
-from utils import dbg
-from dpu_handler import DPUHandler
-from bluecoin_handler import run_bluecoin_session
+from src import config as cfg
+from src.utils import dbg # Vedi nota sotto
+from src.dpu_handler import DPUHandler
+from src.bluecoin_handler import run_bluecoin_session
+
 
 # --- Stato Globale dell'Applicazione ---
 yawn_events = collections.deque(maxlen=cfg.YAWN_THRESHOLD * 8)
