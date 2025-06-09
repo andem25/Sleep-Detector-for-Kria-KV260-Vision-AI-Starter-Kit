@@ -49,24 +49,24 @@ def _final_warning(mean_z: float):
     print(f"Rotazione media Z: {mean_z:.1f} °/s; sbadigli: {YAWN_THRESHOLD}+")
     print("=========================================\n")
 
-def _enable_gyro(device):
-    """Tenta di abilitare il giroscopio usando FeatureSwitch o FeatureCommand."""
-    try:
-        fsw = device.get_feature(FeatureSwitch)
-        gyro = device.get_feature(FeatureGyroscope)
-        if fsw and gyro:
-            dbg("Abilitazione giroscopio con FeatureSwitch.")
-            fsw.switch_on(gyro)
-    except Exception:
-        dbg("FeatureSwitch non disponibile o fallito.")
+# def _enable_gyro(device):
+#     """Tenta di abilitare il giroscopio usando FeatureSwitch o FeatureCommand."""
+#     try:
+#         fsw = device.get_feature(FeatureSwitch)
+#         gyro = device.get_feature(FeatureGyroscope)
+#         if fsw and gyro:
+#             dbg("Abilitazione giroscopio con FeatureSwitch.")
+#             fsw.switch_on(gyro)
+#     except Exception:
+#         dbg("FeatureSwitch non disponibile o fallito.")
     
-    try:
-        fcmd = device.get_feature(FeatureCommand)
-        if fcmd:
-            dbg("Abilitazione giroscopio con FeatureCommand (CMD_SENSORFUSION_ON).")
-            fcmd.send_command(Commands.CMD_SENSORFUSION_ON)
-    except Exception:
-        dbg("FeatureCommand non disponibile o fallito.")
+#     try:
+#         fcmd = device.get_feature(FeatureCommand)
+#         if fcmd:
+#             dbg("Abilitazione giroscopio con FeatureCommand (CMD_SENSORFUSION_ON).")
+#             fcmd.send_command(Commands.CMD_SENSORFUSION_ON)
+#     except Exception:
+#         dbg("FeatureCommand non disponibile o fallito.")
 
 def run_bluecoin_session():
     """
@@ -107,7 +107,6 @@ def run_bluecoin_session():
             dev.disconnect()
             return False
         
-        _enable_gyro(dev)
         
         z_fifo = collections.deque(maxlen=50)
         fifo_listener = _GyroFIFOListener(z_fifo)
