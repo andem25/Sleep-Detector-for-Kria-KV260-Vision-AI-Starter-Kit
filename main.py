@@ -36,10 +36,7 @@ def _bluecoin_runner():
     try:
         run_bluecoin_session()
     finally:
-        # Resetta lo stato dopo la fine della sessione
         bluecoin_active.clear()
-        coffee_warned = False
-        print("[INFO] Stato sbadigli e allerta resettato.")
 
 def _check_yawn_state():
     """Controlla il numero di sbadigli e decide se avviare allarmi o sessioni."""
@@ -109,7 +106,6 @@ def main_loop():
                 if not mouth_roi.size:
                     dbg("ROI della bocca vuota.")
                     continue
-
                 label, conf = dpu.run_inference(mouth_roi)
                 
                 if label == "yawn" and conf > 0.6:

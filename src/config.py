@@ -15,7 +15,8 @@ DEVICE = "/dev/video0"
 FPS = 10
 
 # --- Logica di Rilevamento Sbadigli ---
-YAWN_WINDOW_s = 10 * 60  # 10 minuti
+YAWN_WINDOW_s = 1 * 60  # 10 minuti
+# YAWN_WINDOW_s = 10 * 60  # 10 minuti
 YAWN_THRESHOLD = 3       # Sbadigli per avviare BlueCoin
 YAWN_WARNING_COUNT = 5   # Sbadigli per il warning "caffè"
 YAWN_DEBOUNCE_s = 3      # Tempo minimo tra due sbadigli validi
