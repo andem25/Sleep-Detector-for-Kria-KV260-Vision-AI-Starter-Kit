@@ -10,7 +10,7 @@ from blue_st_sdk.manager import Manager, ManagerListener
 from blue_st_sdk.node import NodeListener
 from blue_st_sdk.feature import FeatureListener
 from blue_st_sdk.features.feature_gyroscope import FeatureGyroscope
-from blue_st_sdk.features.feature_switch import FeatureSwitch, FeatureCommand, Commands
+# from blue_st_sdk.features.feature_switch import FeatureSwitch, FeatureCommand, Commands
 
 
 from .config import SCAN_TIME_s, BLUECOIN_TAG, BLUECOIN_IDX, GYRO_THR, BLUECOIN_SESSION_s, YAWN_THRESHOLD
