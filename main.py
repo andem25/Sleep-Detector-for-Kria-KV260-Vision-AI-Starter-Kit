@@ -17,7 +17,7 @@ import itertools
 import cv2
 
 # Importa i moduli custom e la configurazione
-from src import config as cfg
+import src.config as cfg
 from src.utils import dbg # Vedi nota sotto
 from src.dpu_handler import DPUHandler
 from src.bluecoin_handler import run_bluecoin_session
