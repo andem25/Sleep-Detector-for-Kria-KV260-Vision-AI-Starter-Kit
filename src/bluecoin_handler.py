@@ -12,7 +12,7 @@ from blue_st_sdk.feature import FeatureListener
 from blue_st_sdk.features.feature_gyroscope import FeatureGyroscope
 from config import (SCAN_TIME_s, BLUECOIN_TAG, BLUECOIN_IDX, GYRO_THR,
                     BLUECOIN_SESSION_s, YAWN_THRESHOLD)
-from .src.utils_detector_cps.src.utils import dbg
+from utils import dbg
 
 # --- Listeners BLE specifici per questo modulo ---
 class _MgrListener(ManagerListener):
