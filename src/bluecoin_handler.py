@@ -49,24 +49,6 @@ def _final_warning(mean_z: float):
     print(f"Rotazione media Z: {mean_z:.1f} °/s; sbadigli: {YAWN_THRESHOLD}+")
     print("=========================================\n")
 
-# def _enable_gyro(device):
-#     """Tenta di abilitare il giroscopio usando FeatureSwitch o FeatureCommand."""
-#     try:
-#         fsw = device.get_feature(FeatureSwitch)
-#         gyro = device.get_feature(FeatureGyroscope)
-#         if fsw and gyro:
-#             dbg("Abilitazione giroscopio con FeatureSwitch.")
-#             fsw.switch_on(gyro)
-#     except Exception:
-#         dbg("FeatureSwitch non disponibile o fallito.")
-    
-#     try:
-#         fcmd = device.get_feature(FeatureCommand)
-#         if fcmd:
-#             dbg("Abilitazione giroscopio con FeatureCommand (CMD_SENSORFUSION_ON).")
-#             fcmd.send_command(Commands.CMD_SENSORFUSION_ON)
-#     except Exception:
-#         dbg("FeatureCommand non disponibile o fallito.")
 
 def run_bluecoin_session():
     """
@@ -119,11 +101,6 @@ def run_bluecoin_session():
         while dev.is_connected() and time.time() - t0 < BLUECOIN_SESSION_s and not alert_triggered:
             dev.wait_for_notifications(0.1)
             
-            # # Timeout di 60s senza alert
-            # if time.time() > no_alert_timeout and not alert_triggered:
-            #     dbg("Timeout di 60s per il BlueCoin, nessun alert rilevato.")
-            #     break
-
             if len(z_fifo) == z_fifo.maxlen:
                 mean_z = sum(abs(v) for v in z_fifo) / len(z_fifo)
                 dbg(f"FIFO piena. Media rotazione Z: {mean_z:.1f} °/s")
