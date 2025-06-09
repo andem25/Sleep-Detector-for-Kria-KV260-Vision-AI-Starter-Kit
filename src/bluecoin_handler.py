@@ -114,15 +114,15 @@ def run_bluecoin_session():
         dev.enable_notifications(gyro)
         
         t0 = time.time()
-        no_alert_timeout = t0 + 60 # Timeout di 60s se non ci sono alert
+        # no_alert_timeout = t0 + 60 # Timeout di 60s se non ci sono alert
 
         while dev.is_connected() and time.time() - t0 < BLUECOIN_SESSION_s and not alert_triggered:
             dev.wait_for_notifications(0.1)
             
-            # Timeout di 60s senza alert
-            if time.time() > no_alert_timeout and not alert_triggered:
-                dbg("Timeout di 60s per il BlueCoin, nessun alert rilevato.")
-                break
+            # # Timeout di 60s senza alert
+            # if time.time() > no_alert_timeout and not alert_triggered:
+            #     dbg("Timeout di 60s per il BlueCoin, nessun alert rilevato.")
+            #     break
 
             if len(z_fifo) == z_fifo.maxlen:
                 mean_z = sum(abs(v) for v in z_fifo) / len(z_fifo)

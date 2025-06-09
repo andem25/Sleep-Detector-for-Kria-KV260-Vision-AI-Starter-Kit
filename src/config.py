@@ -21,7 +21,8 @@ YAWN_WARNING_COUNT = 5   # Sbadigli per il warning "caffè"
 YAWN_DEBOUNCE_s = 3      # Tempo minimo tra due sbadigli validi
 
 # --- Logica BlueCoin ---
-BLUECOIN_SESSION_s = 5 * 60  # Durata massima sessione BlueCoin
+# BLUECOIN_SESSION_s = 5 * 60  # Durata massima sessione BlueCoin
+BLUECOIN_SESSION_s = 1 * 60  # Durata massima sessione BlueCoin
 GYRO_THR = 35.0              # Soglia di allerta rotazione giroscopio (°/s)
 SCAN_TIME_s = 5              # Durata scansione BLE
 BLUECOIN_TAG = os.getenv("BLUECOIN_TAG")
