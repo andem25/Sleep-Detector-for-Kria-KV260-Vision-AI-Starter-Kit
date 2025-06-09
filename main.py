@@ -38,7 +38,6 @@ def _bluecoin_runner():
     finally:
         # Resetta lo stato dopo la fine della sessione
         bluecoin_active.clear()
-        yawn_events.clear()
         coffee_warned = False
         print("[INFO] Stato sbadigli e allerta resettato.")
 

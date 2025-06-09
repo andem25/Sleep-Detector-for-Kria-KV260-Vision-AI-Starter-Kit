@@ -10,8 +10,10 @@ from blue_st_sdk.manager import Manager, ManagerListener
 from blue_st_sdk.node import NodeListener
 from blue_st_sdk.feature import FeatureListener
 from blue_st_sdk.features.feature_gyroscope import FeatureGyroscope
-from .config import (SCAN_TIME_s, BLUECOIN_TAG, BLUECOIN_IDX, GYRO_THR,
-                    BLUECOIN_SESSION_s, YAWN_THRESHOLD)
+from blue_st_sdk.features.feature_switch import FeatureSwitch, FeatureCommand, Commands
+
+
+from .config import SCAN_TIME_s, BLUECOIN_TAG, BLUECOIN_IDX, GYRO_THR, BLUECOIN_SESSION_s, YAWN_THRESHOLD
 from .utils import dbg
 
 # --- Listeners BLE specifici per questo modulo ---
@@ -50,7 +52,6 @@ def _final_warning(mean_z: float):
 def _enable_gyro(device):
     """Tenta di abilitare il giroscopio usando FeatureSwitch o FeatureCommand."""
     try:
-        from blue_st_sdk.features.feature_switch import FeatureSwitch
         fsw = device.get_feature(FeatureSwitch)
         gyro = device.get_feature(FeatureGyroscope)
         if fsw and gyro:
@@ -60,7 +61,6 @@ def _enable_gyro(device):
         dbg("FeatureSwitch non disponibile o fallito.")
     
     try:
-        from blue_st_sdk.features.feature_command import FeatureCommand, Commands
         fcmd = device.get_feature(FeatureCommand)
         if fcmd:
             dbg("Abilitazione giroscopio con FeatureCommand (CMD_SENSORFUSION_ON).")
@@ -109,7 +109,7 @@ def run_bluecoin_session():
         
         _enable_gyro(dev)
         
-        z_fifo = collections.deque(maxlen=100)
+        z_fifo = collections.deque(maxlen=50)
         fifo_listener = _GyroFIFOListener(z_fifo)
         gyro.add_listener(fifo_listener)
         dev.enable_notifications(gyro)
@@ -129,7 +129,7 @@ def run_bluecoin_session():
                 mean_z = sum(abs(v) for v in z_fifo) / len(z_fifo)
                 dbg(f"FIFO piena. Media rotazione Z: {mean_z:.1f} °/s")
                 if mean_z > GYRO_THR:
-                    print(f"[ALERT] Rilevata rotazione della testa! Media Z (100 campioni): {mean_z:.1f} °/s > {GYRO_THR}°/s")
+                    print(f"[ALERT] Rilevata rotazione della testa! Media Z (50 campioni): {mean_z:.1f} °/s > {GYRO_THR}°/s")
                     _final_warning(mean_z)
                     alert_triggered = True
     
