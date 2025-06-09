@@ -6,9 +6,9 @@ Carica il modello, pre-processa le immagini e esegue l'inferenza.
 import cv2
 import numpy as np
 import sys
-from pynq_dpu import DpuOverlay
-from config import BIT_PATH, XMODEL_PATH, CLASS_NAMES
-from sleep_detector_cps.src.utils_detector_cps.src.utils import dbg
+from .pynq_dpu import DpuOverlay
+from .config import BIT_PATH, XMODEL_PATH, CLASS_NAMES
+from .src.utils import dbg
 
 class DPUHandler:
     def __init__(self):
