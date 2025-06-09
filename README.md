@@ -2,12 +2,20 @@
 Sleep detector using kria KV260 AI vision, a usb camera connectd and the STMicroelectronics' Bluecoin
 
 # How to Install This Application
+## Prerequisites:
+1. A USB camera (to test this project we used this one [link])
+2. A Bluecoin of STMicroelectronics with this firmware installed:
+   https://www.st.com/en/embedded-software/fp-sns-allmems2.html
+3. A bluetooth USB dongle: we used this one and there is a section where it's explained how to configure it. (this is not mandatory, use the dongle you wish)
 
 ## 1. Flash Ubuntu on your Kria
 
-Download and flash Ubuntu 22.04 for Kria from:
+Download and flash Ubuntu 22.04 for the Kria from:
 https://people.canonical.com/~platform/images/xilinx/kria-ubuntu-22.04/
 
+We recommend to use this version:
+**iot-limerick-kria-classic-desktop-2204-x07-20230302-63.img** that you can download from 
+https://people.canonical.com/~platform/images/xilinx/kria-ubuntu-22.04/iot-limerick-kria-classic-desktop-2204-x07-20230302-63.img.xz
 ## 2. Install and initialize `xlnx-config`
 
 On first boot (while connected to the internet), run:
