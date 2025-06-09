@@ -27,12 +27,10 @@ from src.bluecoin_handler import run_bluecoin_session
 yawn_events = collections.deque(maxlen=cfg.YAWN_THRESHOLD * 8)
 bluecoin_active = threading.Event()
 last_yawn_time = 0.0
-coffee_warned = False # Stato per il warning dei 5 sbadigli
 
 # --- Funzioni di Orchestrazione ---
 def _bluecoin_runner():
     """Wrapper per eseguire la sessione BlueCoin in un thread separato."""
-    global coffee_warned
     try:
         run_bluecoin_session()
     finally:
@@ -40,7 +38,7 @@ def _bluecoin_runner():
 
 def _check_yawn_state():
     """Controlla il numero di sbadigli e decide se avviare allarmi o sessioni."""
-    global last_yawn_time, coffee_warned
+    global last_yawn_time
     now = time.time()
 
     # Rimuovi sbadigli vecchi dalla finestra temporale
@@ -50,9 +48,8 @@ def _check_yawn_state():
     dbg(f"Sbadigli nella finestra di {cfg.YAWN_WINDOW_s / 60:.0f} min: {len(yawn_events)}")
 
     # Warning per 5 sbadigli in 10 minuti
-    if len(yawn_events) >= cfg.YAWN_WARNING_COUNT and not coffee_warned:
-        print("\n‼️  Hai sbadigliato 5 volte in 10 minuti. Riposati o prendi un caffè!  ‼️\n")
-        coffee_warned = True
+    if len(yawn_events) >= cfg.YAWN_WARNING_COUNT:
+        print("\n‼️  Hai sbadigliato spesso in 10 minuti. Riposati o prendi un caffè!  ‼️\n")
 
     # Avvio sessione BlueCoin se si raggiunge la soglia
     if len(yawn_events) >= cfg.YAWN_THRESHOLD and not bluecoin_active.is_set():
