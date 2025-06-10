@@ -1,14 +1,30 @@
-# sleep_detector_cps - Beta
-Sleep detector using kria KV260 AI vision, a usb camera connectd and the STMicroelectronics' Bluecoin
+# Sleep detector for Kria KV260 Vision AI Starter Kit
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
+This project propose a sleep detector using kria KV260 AI vision, a usb camera connected and the STMicroelectronics' Bluecoin.
+## How does it work?
+* You need to have a bluecoin applied to your earlobe in order to detect variations in head movement (forwards/backwards).
+* The camera constantly captures images and sends them to the processing system.
+* The processing system (the kria) evaluates the image through a neural network accelerated in the DPU if the user has yawned.
+* If there are more than 3 yawns in the last 10 minutes, the gyroscope data capture is activated for one minute.
+* If head movements are detected (therefore the user often raises and lowers their head), an alarm is activated to wake them up, otherwise after one minute the connection with the sensor is deactivated.
+* Once 5 yawns are reached within 10 minutes, the user is notified to remember to stop and take a break.
+
+
+
+
+![image](https://github.com/user-attachments/assets/4468c9cd-3f72-4170-8628-87a9e9b1ffb4)
+
 
 # How to Install This Application
 ## Prerequisites:
-1. A USB camera (to test this project we used this one [link])
+1. A USB camera (to test this project we used this one https://depstech.com/en-eu/products/hd-1080p-webcam-with-microphone-d04)
 2. A Bluecoin of STMicroelectronics with this firmware installed:
    https://www.st.com/en/embedded-software/fp-sns-allmems2.html
-3. A bluetooth USB dongle: we used this one and there is a section where it's explained how to configure it. (this is not mandatory, use the dongle you wish)
+3. A bluetooth USB dongle: we used this one (https://www.asus.com/it/networking-iot-servers/adapters/all-series/usbbt400/) and there is a section where it's explained how to configure it. (this is not mandatory, use the dongle you wish)
 
-## 1. Flash Ubuntu on your Kria
+## 1. Flash Ubuntu on your Kria KV260
 
 Download and flash Ubuntu 22.04 for the Kria from:
 https://people.canonical.com/~platform/images/xilinx/kria-ubuntu-22.04/
@@ -18,7 +34,7 @@ We recommend to use this version:
 https://people.canonical.com/~platform/images/xilinx/kria-ubuntu-22.04/iot-limerick-kria-classic-desktop-2204-x07-20230302-63.img.xz
 ## 2. Install and initialize `xlnx-config`
 
-On first boot (while connected to the internet), run:
+At first boot (while connected to the internet), run:
 
 ```bash
 sudo snap install xlnx-config --classic --channel=2.x
@@ -34,7 +50,7 @@ sudo reboot
 
 ## 3. Remove the graphical interface
 
-To save resources:
+In order to save some resources we recommend to disable the greaphical interface:
 
 ```bash
 sudo systemctl get-default
@@ -75,8 +91,6 @@ To find your IP address:
 ```bash
 ip a
 ```
-
-![Example output of `ip a`](path/to/ip_address_example.png)
 
 The default password is `Xilinx`.
 
@@ -128,7 +142,7 @@ Fix a known issue with `blue_st_sdk`:
 ```bash
 sudo sed -i '43c class DictPutSingleElement(collections.abc.MutableMapping):' /usr/local/share/pynq-venv/lib/python3.10/site-packages/blue_st_sdk/utils/dict_put_single_element.py
 ```
-## 9. Clone your project
+## 9. Clone this project
 
 In the terminal (from the PYNQ web app):
 
@@ -137,10 +151,12 @@ git clone https://github.com/andem25/Sleep-Detector-for-Kria-KV260-Vision-AI-Sta
 ```
 
 ## 10. Run the application
-First check if the USB camera is connected and the bluecoin is on and reachable
-Change into the project folder and run:
+First check if the USB camera is connected and the bluecoin is on and reachable!
+
+Get into the project folder and run:
 
 ```bash
 cd Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/
-python app.py
+python main.py
 ```
+To stop the app press `CTRL+C`
