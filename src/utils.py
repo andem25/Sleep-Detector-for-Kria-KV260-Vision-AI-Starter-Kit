@@ -1,11 +1,11 @@
 # utils.py
 """
-Funzioni di utilità, come il logger di debug.
+Utility functions for debugging and logging.
 """
 import sys
 from .config import DEBUG
 
 def dbg(msg: str):
-    """Stampa un messaggio di debug su stderr se DEBUG è True."""
+    """Prints a debug message to stderr if DEBUG is True."""
     if DEBUG:
         print(f"[DEBUG] {msg}", file=sys.stderr, flush=True)
