@@ -11,7 +11,7 @@ This project proposes a sleep detector using kria KV260 AI vision, a usb camera 
 * If head movements are detected (therefore the user often raises and lowers their head), an alarm is activated to wake them up, otherwise after one minute the connection with the sensor is deactivated.
 * Once 5 yawns are reached within 10 minutes, the user is notified to remember to stop and take a break.
 
-⚠️ Note: At the moment this version does not support any hardware for audio/light, it only shows a terminal output!
+⚠️ **Note: At the moment this version does not support any hardware for audio/light, it only shows a terminal output!**
 
 
 ![image](https://github.com/user-attachments/assets/4468c9cd-3f72-4170-8628-87a9e9b1ffb4)
