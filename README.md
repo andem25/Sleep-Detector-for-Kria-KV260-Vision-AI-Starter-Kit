@@ -177,3 +177,11 @@ DBG=1 python main.py
 BLUECOIN_TAG='tag' python main.py
 ```
 If you don't specify these fields the default is 0 for DBG and if you do not specify BLUECOIN_TAG it will scan automatically to the first bluecoin it finds!
+
+## The net we use to classify yawns
+In order to classify yawns by the images that the camera captures we use a pretrained neural net (`net.xmodel`):
+* in particular the mobilenetv2 (https://pytorch.org/hub/pytorch_vision_mobilenet_v2/)
+* it has been finetuned using the Yawn Dataset (https://www.kaggle.com/datasets/davidvazquezcic/yawn-dataset)
+* it has been quantized (int 8 bit) for the DPU DPUCZDX8G (with footprint 0x101000016010407) developed by Xilinx using Vitis AI 2.5 (https://github.com/Xilinx/Vitis-AI/releases/tag/v2.5, Docker: docker pull xilinx/vitis-ai:2.5)
+
+
