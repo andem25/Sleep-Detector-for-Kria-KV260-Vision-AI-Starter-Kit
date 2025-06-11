@@ -5,27 +5,27 @@ Centralizza tutte le costanti e i parametri del sistema.
 """
 import os
 
-# --- Configurazione DPU e Modello ---
+# --- DPU configuration and model ---
 BIT_PATH = "dpu.bit"
-XMODEL_PATH = "./models/a.xmodel"
+XMODEL_PATH = "./models/net.xmodel"
 CLASS_NAMES = ["no_yawn", "yawn"]
 
-# --- Configurazione Camera ---
+# --- Camera ---
 DEVICE = "/dev/video0"
 FPS = 10
 
-# --- Logica di Rilevamento Sbadigli ---
-YAWN_WINDOW_s = 1 * 60  # 10 minuti
-# YAWN_WINDOW_s = 10 * 60  # 10 minuti
-YAWN_THRESHOLD = 3       # Sbadigli per avviare BlueCoin
-YAWN_WARNING_COUNT = 5   # Sbadigli per il warning "caffè"
-YAWN_DEBOUNCE_s = 3      # Tempo minimo tra due sbadigli validi
+# --- Yawn Detection Logic ---
+YAWN_WINDOW_s = 1 * 60  # 10 minutes
+# YAWN_WINDOW_s = 10 * 60  # 10 minutes
+YAWN_THRESHOLD = 3       # Yawns to trigger BlueCoin
+YAWN_WARNING_COUNT = 5   # Yawns for "coffee" warning
+YAWN_DEBOUNCE_s = 3      # Minimum time between two valid yawns
 
-# --- Logica BlueCoin ---
-# BLUECOIN_SESSION_s = 5 * 60  # Durata massima sessione BlueCoin
-BLUECOIN_SESSION_s = 1 * 60  # Durata massima sessione BlueCoin
-GYRO_THR = 20.0              # Soglia di allerta rotazione giroscopio (°/s)
-SCAN_TIME_s = 5              # Durata scansione BLE
+# --- BlueCoin Logic ---
+# BLUECOIN_SESSION_s = 5 * 60  # Maximum BlueCoin session duration
+BLUECOIN_SESSION_s = 1 * 60  # Maximum BlueCoin session duration
+GYRO_THR = 20.0              # Gyroscope rotation alert threshold (°/s)
+SCAN_TIME_s = 5              # BLE scan duration
 BLUECOIN_TAG = os.getenv("BLUECOIN_TAG")
 BLUECOIN_IDX = int(os.getenv("BLUECOIN_INDEX", "1"))
 
