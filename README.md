@@ -91,8 +91,14 @@ To find your IP address:
 ```bash
 ip a
 ```
+The output should be something like:
+![Screenshot 2025-06-11 125139](https://github.com/user-attachments/assets/8906825b-4444-4b5b-983e-45a5d810e6e1)
 
 The default password is `Xilinx`.
+
+You can open now a terminal session in this section:
+![image](https://github.com/user-attachments/assets/c2816269-844b-4356-a27d-b763f0fc04b3)
+
 
 
 ## 6. Configure the Bluetooth dongle
@@ -124,7 +130,7 @@ The default password is `Xilinx`.
 
 ## 7. Install Python libraries
 
-After reboot, in your virtual environment (e.g., `sleep_venv`):
+After reboot, in the pynq environment:
 
 ```bash
 pip install blue-st-sdk bluepy opuslib
@@ -144,7 +150,7 @@ sudo sed -i '43c class DictPutSingleElement(collections.abc.MutableMapping):' /u
 ```
 ## 9. Clone this project
 
-In the terminal (from the PYNQ web app):
+Now rhat we have configured the environment, It's time to clone the repo!
 
 ```bash
 git clone https://github.com/andem25/Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/
@@ -160,3 +166,14 @@ cd Sleep-Detector-for-Kria-KV260-Vision-AI-Starter-Kit/
 python main.py
 ```
 To stop the app press `CTRL+C`
+
+If you want you can set:
+* The debug mode to troubleshoot some issues:
+```bash
+DBG=1 python main.py
+```
+* The name of the bluecoin you want to connect to:
+```bash
+BLUECOIN_TAG='tag' python main.py
+```
+If you don't specify these fields the default is 0 for DBG and if you do not specify BLUECOIN_TAG it will scan automatically to the first bluecoin it finds!
