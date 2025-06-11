@@ -184,4 +184,40 @@ In order to classify yawns by the images that the camera captures we use a pretr
 * it has been finetuned using the Yawn Dataset (https://www.kaggle.com/datasets/davidvazquezcic/yawn-dataset)
 * it has been quantized (int 8 bit) for the DPU DPUCZDX8G (with footprint 0x101000016010407) developed by Xilinx using Vitis AI 2.5 (https://github.com/Xilinx/Vitis-AI/releases/tag/v2.5, Docker: docker pull xilinx/vitis-ai:2.5)
 
+This is the class that we have redefined in order to optimize the net and have only 2 classes (yawn / no_yawn):
+This class includes a 2-output classifier and a forward pass structure
+that the Vitis AI compiler can understand and optimize properly.
 
+```python
+import torch
+import torch.nn as nn
+from torchvision.models import mobilenet_v2
+
+class MobileNetV2Yawn(nn.Module):
+    def __init__(self, num_classes: int = 2):
+        super().__init__()
+        # Load the base MobileNetV2 structure
+        # Try-except handles different torchvision versions (newer use weights=None, older use pretrained=False)
+        try:
+            m = mobilenet_v2(weights=None)
+        except TypeError:
+            m = mobilenet_v2(pretrained=False)
+        
+        # Replace the final classifier with a binary classifier (2 classes)
+        # This modifies only the last linear layer while keeping the MobileNetV2 backbone intact
+        m.classifier[1] = nn.Linear(m.last_channel, num_classes)
+        
+        # Explicitly assign modules to our class for clear DPU compilation
+        # Breaking down the network this way helps Vitis AI understand the model structure
+        self.features = m.features      # Feature extraction layers (convolutional backbone)
+        self.pool = nn.AdaptiveAvgPool2d((1, 1))  # Explicit pooling layer reduces spatial dimensions to 1x1
+        self.classifier = m.classifier  # Classification head (includes dropout and linear layer)
+
+    def forward(self, x):
+        # Explicit forward pass with clear operation sequence for DPU compilation
+        x = self.features(x)            # Extract features through convolutional layers
+        x = self.pool(x)                # Global average pooling to reduce spatial dimensions
+        x = torch.flatten(x, 1)         # Flatten 2D features to 1D vector for the classifier
+        return self.classifier(x)       # Apply classifier to get final predictions
+
+```
