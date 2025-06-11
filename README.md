@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-This project proposes a sleep detector using kria KV260 AI vision, a usb camera connected and the STMicroelectronics' Bluecoin.
+This project proposes a sleep detector using kria KV260 AI vision, a usb camera connected and the STMicroelectronics' Bluecoin
 ## How does it work?
 * You need to have a bluecoin applied to your earlobe in order to detect variations in head movement (forwards/backwards).
 * The camera constantly captures images and sends them to the processing system.
